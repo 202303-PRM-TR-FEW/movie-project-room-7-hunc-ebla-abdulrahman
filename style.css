@@ -25,13 +25,33 @@ body{
 
 .eachActor{
     width: 150px;
-    margin: 50px;
 }
 
 .someImages{
     border-radius: 50%;
 }
 
+.eachSimilarMovie{
+    border-radius: 20%;
+}
+
+.eachSimMovie{
+    width: 200px;
+    height: 100px;
+}
+
 .overview{
     width: 800px;
+}
+
+.actorPageBiography{
+    width: 700px;
+}
+
+.actorRelatedMovies{
+    width: 600px;
+}
+
+#knownFor{
+ width: 800px;   
 }
