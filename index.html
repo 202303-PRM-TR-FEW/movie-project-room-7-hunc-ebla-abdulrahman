@@ -8,11 +8,46 @@
     <link rel="stylesheet" href="style.css">
     <title>Movie</title>
 </head>
-
 <body>
-    <div class="container">
+    <nav class="bg-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex justify-between h-16">
+            <div class="flex items-center">
+              <a href="/index.html" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
+              <div class="relative inline-block text-left">
+                <button id="movies-dropdown" type="button" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Movies</button>
+                <div id="movies-dropdown-menu" class="origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden">
+                  <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="movies-menu">
+                  </div>
+                </div>
+              </div>
+              <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Actor List</a>
+              <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">About</a>
+            </div>
+            <div class="flex items-center">
+              <input type="text" class="rounded-md px-3 py-2" placeholder="Search..."/>
+              <select class="rounded-md px-3 py-2 ml-2">
+                <option value="popular">Popular</option>
+                <option value="release-date">Release Date</option>
+                <option value="top-rated">Top Rated</option>
+                <option value="now-playing">Now Playing</option>
+                <option value="upcoming">Upcoming</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </nav>
+    <div>
+      <h1 class="text-center mt-5 text-7xl mb-5">Movie Website</h1>
     </div>
+    <div class="container grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-10 mb-3"></div>
     <script type="text/javascript" src="script.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <footer class="bg-gray-800 py-4 text-center">
+        <a href="https://www.example.com" class="text-gray-200 font-bold mr-4">Hunç</a>
+        <a href="https://www.example.com" class="text-gray-200 font-bold mr-4">Abdulrahman</a>
+        <a href="https://www.example.com" class="text-gray-200 font-bold">Ebla</a>
+    </footer>
 </body>
 
 </html>
