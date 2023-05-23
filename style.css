@@ -9,6 +9,7 @@ body{
 
 #movie-backdrop {
     width: 100%;
+    height: 25%;
 }
 
 .container {
@@ -29,10 +30,12 @@ body{
 
 .someImages{
     border-radius: 50%;
+    cursor:pointer;
 }
 
 .eachSimilarMovie{
     border-radius: 20%;
+    cursor:pointer;
 }
 
 .eachSimMovie{
@@ -47,11 +50,32 @@ body{
 .actorPageBiography{
     width: 700px;
 }
-
+.trailerVideo iframe{
+    width:30rem;
+    height: 20rem;
+}
 .actorRelatedMovies{
     width: 600px;
 }
-
+.actorRelatedMovies:hover{
+    cursor: pointer;
+}
 #knownFor{
  width: 800px;   
+}
+.actorProfilePic{
+    border-end-start-radius: 80px 80px;
+}
+.productionImgAnmi{
+    overflow: hidden;
+    transition-duration: 0.8s;
+    transition-property: transform;
+}
+.productionImgAnmi:hover{
+    transform: rotateX(360deg);
+    -webkit-transform: rotateX(360deg);
+    box-shadow: 0 0 50px rgb(16, 24, 68);
+    transition-delay: 0.2s;
+    background-color: #BCCEF8;
+    cursor: pointer;
 }

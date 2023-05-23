@@ -83,9 +83,9 @@ const renderMovies = (movies) => {
     const movieDiv = document.createElement("div");
     movieDiv.innerHTML = `
     <div class="items-center">
-        <img id="movie-backdrop" class="w-96 rounded-full border border-gray-300 p-4" src="${BACKDROP_BASE_URL + movie.backdrop_path}" alt="${movie.title
+        <img id="movie-backdrop" class="w-96 rounded-full border border-gray-300 p-2 cursor-pointer" src="${BACKDROP_BASE_URL + movie.backdrop_path}" alt="${movie.title
       } poster">
-    <h3>${movie.title}</h3>
+    <h3 class="text-center mt-2 font-bold italic font-serif text-white bg-gradient-to-r from-purple-500 to-pink-500 rounded-full">${movie.title}</h3>
     </div>`;
     movieDiv.addEventListener("click", () => {
       movieDetails(movie);
@@ -103,39 +103,39 @@ const renderMovie = (movie, movieCast, movieDirector, relatedMovies, movieTraile
       </div>
       <div class="col-md-8">
         <div class="mb-3">
-          <h1 id="movie-title">${movie.title}</h1>
+          <h1 id="movie-title" class="font-bold font-serif">${movie.title}</h1>
         </div>
         <div class="trailerVideo mb-3">
           <iframe class="trailerVideo" src="https://www.youtube.com/embed/${movieTrailer.results[0].key}?autoplay=1"></iframe>
         </div>
         <div class="mb-3 mt-1">       
-          <p id="movie-release-date"><b>Release Date:</b> ${movie.release_date}</p>
-          <p id="movie-runtime"><b>Runtime:</b> ${movie.runtime} Minutes</p>
+          <p id="movie-release-date" class="font-serif"><b>Release Date:</b> ${movie.release_date}</p>
+          <p id="movie-runtime" class="font-open-sans"><b>Runtime:</b> ${movie.runtime} Minutes</p>
         </div>
         <div class="overview mb-2">
-          <h3 class="mb-1 font-bold">Overview:</h3>
-          <p id="movie-overview">${movie.overview}</p>
+          <h3 class="mb-1 font-bold font-serif">Overview:</h3>
+          <p id="movie-overview" class="font-open-sans text-justify">${movie.overview}</p>
         </div>
         <div class="mb-2">
-          <h3 class="mb-1 font-bold">Director:</h3>
-          <p id="movie-director">${movieDirector.name}</p>
+          <h3 class="mb-1 font-bold font-serif">Director:</h3>
+          <p id="movie-director" class="font-open-sans">${movieDirector.name}</p>
         </div>
         <div class="mb-2">
-          <h3 class="mb-1 font-bold">Language:</h3>
-          <p>${movie.spoken_languages.map((languge) => `${languge.english_name}`)}</p>
+          <h3 class="mb-1 font-bold font-serif">Language:</h3>
+          <p class="font-open-sans">${movie.spoken_languages.map((languge) => `${languge.english_name}`)}</p>
         </div>
         <div class="mb-2">
-          <h3 class="mb-1 font-bold">Vote Average:</h3>
-          <p id="movie-director">${movie.vote_average}</p>
+          <h3 class="mb-1 font-bold font-serif">Vote Average:</h3>
+          <p id="movie-director" class="font-open-sans">${movie.vote_average}</p>
         </div>
-        <h3 class="font-bold mt-2">Actors:</h3>
+        <h3 class="font-bold mt-2 font-serif">Actors:</h3>
         <div class="actors grid grid-cols-5 gap-40 mb-3"></div>
         <ul id="actors" class="list-unstyled"></ul>
-        <h3>Similar Movies:</h3>
+        <h3 class="font-bold font-serif">Similar Movies:</h3>
         <div class="similar-movies-container mt-1 mb-2 grid grid-cols-5 gap-40"></div>
-        <div class="mt-3 mb-2">
-          <h5 class="mt-2 text-center">Production Companies</h5>
-          <div class="productionCompanies">${movie.production_companies.map((company) => `<img id="production" src="${BACKDROP_BASE_URL + company.logo_path}" alt="${company.name}"`)}</div>
+        <div class="mt-12 mb-2">
+          <h5 class="mt-2 text-center font-serif font-bold">Production Companies</h5>
+          <div class="productionCompanies">${movie.production_companies.map((company) => `<img id="production" class="productionImgAnmi" src="${BACKDROP_BASE_URL + company.logo_path}" alt="${company.name}"`)}</div>
         </div>
       </div>
     </div>
@@ -181,23 +181,27 @@ const actorDetails = async (actor) => {
 const renderActor = (actor) => {
   CONTAINER.innerHTML = "";
   CONTAINER.innerHTML = `
-      <div class="row">
-        <div class="actorDiv grid-cols-2">
+      <div class="row ">
+        <div class="actorDiv grid-cols-2 ">
+          <div class="grid grid-cols-2">
           <div>
-            <img id="actor-backdrop" src=${PROFILE_BASE_URL + actor.profile_path}>
+          <img id="actor-backdrop" class="actorProfilePic" src=${PROFILE_BASE_URL + actor.profile_path}>
           </div>
-          <div class="col-md-8">
-            <h5 id="actor-name" class="mt-3 mb-1 font-bold">${actor.name}</h5>
-            <p id="actor-gender"><h3 class="mt-1 mb-2 font-bold">Gender:</h3><p class="info"> ${actor.gender == 1 ? "famale" : "male"}</p></p>
+          <div>
+          <h5 id="actor-name" class="mt-3 mb-1 font-bold">${actor.name}</h5>
+            <p id="actor-gender"><h3 class="mt-1 mb-2 font-bold">Gender: ${actor.gender == 1 ? "famale" : "male"}</h3> </p>
             <p id="actor-popularity"><h3 class="font-bold mt-1 mb-1">Popularity:</h3> <p class="info">${actor.popularity}</p></p>
             <p id="actor-birthday"><h3 class="font-bold mt-1 mb-1">Birthday:</h3> <p class="info">${actor.birthday}</p></p>
             <p id="actor-deathday"><h3 class="font-bold mt-1 mb-1">Deathday:</h3> <p class="info">${actor.deathday}</p></p>
+          </div>
+          </div>
+          <div class="col-md-8">
             <div class="actorPageBiography mt-3 mb-3">
               <h3 class="font-bold mt-1 mb-1">Biography</h3>
-              <p class="info" id="biography">${actor.biography}</p>
+              <p class="info text-justify" id="biography">${actor.biography}</p>
             </div>
-            <h3> Related Movies:</h3> 
-            <div class="row grid grid-cols-4 gap-5" id="knownFor"></div>
+            <h3 class="mb-2 font-bold"> Related Movies:</h3> 
+            <div class="row grid grid-cols-4 gap-5 relatedMovAnim" id="knownFor"></div>
         </div>
       </div>`;
 
@@ -220,7 +224,7 @@ const actorMovieCredits = async (person_id) => {
       const movieCard = document.createElement("div");
       movieCard.innerHTML = `
       <div class="dontKnow">
-        <img class="actorRelatedMovies" src="${imagePath}" alt="${dataRes[i].title
+        <img class="actorRelatedMovies eachSimilarMovie" src="${imagePath}" alt="${dataRes[i].title
         } poster  "></div>
         <p class="titles" id="titles1">${dataRes[i].title}</p>`;
 
@@ -246,18 +250,20 @@ actorsBtn.addEventListener("click", actorrun);
 const renderActors = (actors) => {
   CONTAINER.innerHTML = "";
   const actorsContainer = document.createElement("div");
-  actorsContainer.setAttribute("class","actorsPage");
+  actorsContainer.setAttribute("class", "actorsPage");
   actors.map((actor) => {
     const actorDiv = document.createElement("div");
     actorDiv.innerHTML = `
-      <img class="actorsImages" src="${PROFILE_BASE_URL + actor.profile_path}" alt="${
-      actor.name} poster"><div class="actorsCards"><p class="info" id="actorsNames">${actor.name}</p></div>`;
+      <img class="actorsImages" src="${PROFILE_BASE_URL + actor.profile_path}" alt="${actor.name} poster"><div class="actorsCards"><p class="info" id="actorsNames">${actor.name}</p></div>`;
 
     actorDiv.addEventListener("click", () => {
-      actorDetails(actor);});
-    
+      actorDetails(actor);
+    });
+
     actorsContainer.appendChild(actorDiv);
-    CONTAINER.appendChild(actorsContainer)});};
+    CONTAINER.appendChild(actorsContainer)
+  });
+};
 
 const fetchActors = async () => {
   const url = constructUrl(`person/popular`);
