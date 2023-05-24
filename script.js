@@ -77,6 +77,28 @@ const fetchActor = async (person_id) => {
   return data;
 };
 
+const fetchGenre = async () => {
+  const genreButton = document.querySelector('#dropdown');
+  const url = constructUrl(`genre/movie/list`); 
+  const res = await fetch(url);
+  const data = await res.json();
+
+  data.genres.forEach(element => {
+    const genreSelection = document.createElement("a");
+    genreSelection.textContent = element.name;
+    genreSelection.classList.add("genre")
+    genreButton.appendChild(genreSelection);
+
+    genreSelection.addEventListener("click", () => {
+      const apiKey = '0c33a84a65c320f35cf04b120b8ab6aa'; // Replace with your actual API key
+      fetch(`${TMDB_BASE_URL}/discover/movie?api_key=${apiKey}&with_genres=${element.id}`)
+        .then(resp => resp.json())
+        .then(data => renderMovies(data.results))
+    })
+  })
+};
+fetchGenre();
+
 // You'll need to play with this function in order to add features and enhance the style.
 const renderMovies = (movies) => {
   movies.map((movie) => {
@@ -254,8 +276,7 @@ const renderActors = (actors) => {
   actors.map((actor) => {
     const actorDiv = document.createElement("div");
     actorDiv.innerHTML = `
-      <img class="actorsImages" src="${PROFILE_BASE_URL + actor.profile_path}" alt="${actor.name} poster"><div class="actorsCards"><p class="info" id="actorsNames">${actor.name}</p></div>`;
-
+      <img class="actorsImages rounded-md cursor-pointer" src="${PROFILE_BASE_URL + actor.profile_path}" alt="${actor.name} poster"><div class="actorsCards"><p class="info text-center mt-2" id="actorsNames">${actor.name}</p></div>`;
     actorDiv.addEventListener("click", () => {
       actorDetails(actor);
     });
@@ -272,6 +293,17 @@ const fetchActors = async () => {
   // console.log(data.results[0][3]);
   return data.results;
 };
-// fetchActors()
+
+const dropDownButtons = document.querySelectorAll("#dropdownBtn");
+const dropDownContent = document.querySelectorAll("#dropdown")
+dropDownButtons.forEach(button => {
+  button.addEventListener("click", (e) => {
+    if (e.target.textContent === "Genre ") {
+      dropDownContent.classList.toggle("show")
+    } else if (e.target.textContent === "Filter ") {
+      filterDropDown.classList.toggle("show")
+    }
+  })
+});
 
 document.addEventListener("DOMContentLoaded", autorun);

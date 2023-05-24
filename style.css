@@ -12,6 +12,17 @@ body{
     height: 25%;
 }
 
+.actorsPage{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr; 
+    gap: 100px;
+    grid-auto-rows: 200px;
+    width: 900px;
+    margin-bottom: 60px;
+    justify-content: center;
+    margin-left: 150px;
+}
+
 .container {
     padding-top: 32px;
 }
@@ -54,23 +65,29 @@ body{
     width:30rem;
     height: 20rem;
 }
+
 .actorRelatedMovies{
     width: 600px;
 }
+
 .actorRelatedMovies:hover{
     cursor: pointer;
 }
+
 #knownFor{
  width: 800px;   
 }
+
 .actorProfilePic{
     border-end-start-radius: 80px 80px;
 }
+
 .productionImgAnmi{
     overflow: hidden;
     transition-duration: 0.8s;
     transition-property: transform;
 }
+
 .productionImgAnmi:hover{
     transform: rotateX(360deg);
     -webkit-transform: rotateX(360deg);
@@ -78,4 +95,10 @@ body{
     transition-delay: 0.2s;
     background-color: #BCCEF8;
     cursor: pointer;
+}
+
+.genre{
+    display: block;
+    text-align: center;
+    margin: 2px;
 }
