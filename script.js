@@ -79,7 +79,7 @@ const fetchActor = async (person_id) => {
 
 const fetchGenre = async () => {
   const genreButton = document.querySelector('#dropdown');
-  const url = constructUrl(`genre/movie/list`); 
+  const url = constructUrl(`genre/movie/list`);
   const res = await fetch(url);
   const data = await res.json();
 
@@ -91,10 +91,10 @@ const fetchGenre = async () => {
 
     genreSelection.addEventListener("click", () => {
       fetch(`${TMDB_BASE_URL}/discover/movie?api_key=${atob(
-          "NTQyMDAzOTE4NzY5ZGY1MDA4M2ExM2M0MTViYmM2MDI="
+        "NTQyMDAzOTE4NzY5ZGY1MDA4M2ExM2M0MTViYmM2MDI="
       )}&with_genres=${element.id}`)
-          .then(resp => resp.json())
-          .then(data => renderMovies(data.results))
+        .then(resp => resp.json())
+        .then(data => renderMovies(data.results))
     })
   })
 };
@@ -102,7 +102,7 @@ fetchGenre();
 //0c33a84a65c320f35cf04b120b8ab6aa
 // You'll need to play with this function in order to add features and enhance the style.
 const renderMovies = (movies) => {
-  CONTAINER.innerHTML="";
+  CONTAINER.innerHTML = "";
   movies.map((movie) => {
     const movieDiv = document.createElement("div");
     movieDiv.innerHTML = `
@@ -304,90 +304,121 @@ const dropDownContent = document.querySelector("#dropdown")
 const filterDropDown = document.querySelector("#filter-dropdown-content")
 
 filterDropDown.childNodes.forEach(link => {
-    link.addEventListener("click", () => {
-        if (link.textContent === "Up coming") {
-            fetch(`${TMDB_BASE_URL}/movie/upcoming?api_key=${atob(
-                "NTQyMDAzOTE4NzY5ZGY1MDA4M2ExM2M0MTViYmM2MDI=")}`)
-                .then(resp => resp.json())
-                .then(data => renderMovies(data.results))
-        } else if (link.textContent === "Popular") {
-            fetch(`${TMDB_BASE_URL}/movie/popular?api_key=${atob(
-                "NTQyMDAzOTE4NzY5ZGY1MDA4M2ExM2M0MTViYmM2MDI=")}`)
-                .then(resp => resp.json())
-                .then(data => renderMovies(data.results))
-        } else if (link.textContent === "Now playing") {
-            fetch(`${TMDB_BASE_URL}/movie/now_playing?api_key=${atob(
-                "NTQyMDAzOTE4NzY5ZGY1MDA4M2ExM2M0MTViYmM2MDI=")}`)
-                .then(resp => resp.json())
-                .then(data => renderMovies(data.results))
-        } else if (link.textContent === "Top rated") {
-            fetch(`${TMDB_BASE_URL}/movie/top_rated?api_key=${atob(
-                "NTQyMDAzOTE4NzY5ZGY1MDA4M2ExM2M0MTViYmM2MDI=")}`)
-                .then(resp => resp.json())
-                .then(data => renderMovies(data.results))
-        }
-    })
+  link.addEventListener("click", () => {
+    if (link.textContent === "Up coming") {
+      fetch(`${TMDB_BASE_URL}/movie/upcoming?api_key=${atob(
+        "NTQyMDAzOTE4NzY5ZGY1MDA4M2ExM2M0MTViYmM2MDI=")}`)
+        .then(resp => resp.json())
+        .then(data => renderMovies(data.results))
+    } else if (link.textContent === "Popular") {
+      fetch(`${TMDB_BASE_URL}/movie/popular?api_key=${atob(
+        "NTQyMDAzOTE4NzY5ZGY1MDA4M2ExM2M0MTViYmM2MDI=")}`)
+        .then(resp => resp.json())
+        .then(data => renderMovies(data.results))
+    } else if (link.textContent === "Now playing") {
+      fetch(`${TMDB_BASE_URL}/movie/now_playing?api_key=${atob(
+        "NTQyMDAzOTE4NzY5ZGY1MDA4M2ExM2M0MTViYmM2MDI=")}`)
+        .then(resp => resp.json())
+        .then(data => renderMovies(data.results))
+    } else if (link.textContent === "Top rated") {
+      fetch(`${TMDB_BASE_URL}/movie/top_rated?api_key=${atob(
+        "NTQyMDAzOTE4NzY5ZGY1MDA4M2ExM2M0MTViYmM2MDI=")}`)
+        .then(resp => resp.json())
+        .then(data => renderMovies(data.results))
+    }
+  })
 })
 
 // Dropdown clicks
 dropDownButtons.forEach(button => {
-    button.addEventListener("click", (e) => {
-        if (e.target.textContent === "Genre ") {
-            dropDownContent.classList.toggle("show")
-        } else if (e.target.textContent === "Filter ") {
-            filterDropDown.classList.toggle("show")
-        }
-    })
+  button.addEventListener("click", (e) => {
+    if (e.target.textContent === "Genre ") {
+      dropDownContent.classList.toggle("show")
+    } else if (e.target.textContent === "Filter ") {
+      filterDropDown.classList.toggle("show")
+    }
+  })
 })
 
 window.onclick = function (e) {
-    if (!e.target.matches('#dropdownBtn')) {
-        if (dropDownContent.classList.contains('show')) {
-            dropDownContent.classList.remove('show');
-        } else if (filterDropDown.classList.contains('show')) {
-            filterDropDown.classList.remove('show');
-        }
+  if (!e.target.matches('#dropdownBtn')) {
+    if (dropDownContent.classList.contains('show')) {
+      dropDownContent.classList.remove('show');
+    } else if (filterDropDown.classList.contains('show')) {
+      filterDropDown.classList.remove('show');
     }
+  }
 }
 
 const searchInput = document.getElementById("search-input");
 searchInput.addEventListener("input", (e) => {
   fetch(`https://api.themoviedb.org/3/search/multi?api_key=542003918769df50083a13c415bbc602&language=en-US&query=${e.target.value}&page=1&include_adult=false`)
-  .then(resp => resp.json())
-  .then(data => { 
-    console.log(e.target.value)
-    data.results.forEach(result => {
-    if (result.media_type === "movie") {
-    renderMovies(data.results)}})})})
-
-    searchInput.addEventListener("input", (e) => {
-      fetch(`https://api.themoviedb.org/3/search/multi?api_key=542003918769df50083a13c415bbc602&language=en-US&query=${e.target.value}&page=1&include_adult=false`)
-      .then(resp => resp.json())
-      .then(data => { 
-        //console.log(data.results)
-        data.results.forEach(result => {
-          if (result.media_type === "movie") {
-            renderMovies(data.results)
-          }
-        })  
-        //actorsContainer.innerHTML = "";
-        data.results.forEach(result => {
-          if (result.media_type === "person") {
-            console.log(result.name)
-            const singleActor = document.createElement("div")
-            singleActor.setAttribute("class","actorsContainers");
-            const actorDiv = document.createElement("div");
-            actorDiv.innerHTML = `
-            <img  src="${PROFILE_BASE_URL + result.profile_path}" alt="${result.name} poster">
-            <h3>${result.name}</h3>`;
-    
-            actorDiv.addEventListener("click", () => {
-                actorDetails(actor);
-            });
-        
-           singleActor.appendChild(actorDiv);
-           actorsContainer.appendChild(singleActor);
-          }
-        })
+    .then(resp => resp.json())
+    .then(data => {
+      console.log(e.target.value)
+      data.results.forEach(result => {
+        if (result.media_type === "movie") {
+          renderMovies(data.results)
+        }
       })
     })
+})
+
+searchInput.addEventListener("input", (e) => {
+  fetch(`https://api.themoviedb.org/3/search/multi?api_key=542003918769df50083a13c415bbc602&language=en-US&query=${e.target.value}&page=1&include_adult=false`)
+    .then(resp => resp.json())
+    .then(data => {
+      //console.log(data.results)
+      data.results.forEach(result => {
+        if (result.media_type === "movie") {
+          renderMovies(data.results)
+        }
+      })
+      //actorsContainer.innerHTML = "";
+      data.results.forEach(result => {
+        if (result.media_type === "person") {
+          console.log(result.name)
+          const singleActor = document.createElement("div")
+          singleActor.setAttribute("class", "actorsContainers");
+          const actorDiv = document.createElement("div");
+          actorDiv.innerHTML = `
+            <img  src="${PROFILE_BASE_URL + result.profile_path}" alt="${result.name} poster">
+            <h3>${result.name}</h3>`;
+
+          actorDiv.addEventListener("click", () => {
+            actorDetails(actor);
+          });
+
+          singleActor.appendChild(actorDiv);
+          actorsContainer.appendChild(singleActor);
+        }
+      })
+    })
+});
+
+const aboutPage = () => {
+  CONTAINER.innerHTML = "";
+  CONTAINER.innerHTML = `
+      <div class="aboutPage grid grid-cols-3 gap-20 mt-10">
+        <div class="github1">
+          <div class="gif" style="width:100%;height:0;padding-bottom:41%;position:relative;"><iframe src="https://giphy.com/embed/wEgs1cd7vDTt6" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/iron-man-wEgs1cd7vDTt6"></a></p>
+          <h3  class="mt-3 text-center"><a href="https://github.com/AbdalrahmanM">Abdulrahman Alsamraie</a><h3>
+        </div>
+        <div class="github2">
+          <div class="gif" style="width:100%;height:0;padding-bottom:56%;position:relative;"><iframe src="https://giphy.com/embed/fbVm7CtfIbE7GeatQN" width="100%" height="100%" style="position:absolute"  frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/HBOMax-girl-power-wonder-woman-hbo-max-fbVm7CtfIbE7GeatQN"></a></p>         
+          <h3  class="mt-3 text-center"><a href="https://github.com/pluviophillee" class="mt-3 text-center">Ebla Ekerdiker</a><h3>
+        </div>
+        <div class="github3">
+        <div style="width:100%;height:0;padding-bottom:46%;position:relative;"><iframe src="https://giphy.com/embed/FhGEiCV6nKjOo" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/party-is-here-FhGEiCV6nKjOo"></a></p>       
+        <h3  class="mt-3 text-center"><a href="https://github.com/hunctasci" class="mt-3 text-center">Hunç Taşçı</a><h3>
+        </div>
+        <div>
+
+        </div>
+      </div>`
+};
+
+const aboutBtn = document.querySelector('#aboutBtn');
+aboutBtn.addEventListener("click", () => {
+  aboutPage();
+});

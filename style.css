@@ -102,3 +102,16 @@ body{
     text-align: center;
     margin: 2px;
 }
+
+.aboutPageContainer{
+    margin: 20px;
+}
+
+.gif{
+    height: 500px;
+}
+
+.aboutPage{
+    width: 1000px;
+    margin-left: 120px;
+}
