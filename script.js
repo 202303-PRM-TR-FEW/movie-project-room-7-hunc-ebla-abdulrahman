@@ -59,7 +59,6 @@ const fetchSimilarMovies = async (movie_id) => {
   const url = constructUrl(`movie/${movie_id}/similar`);
   const res = await fetch(url);
   const data = await res.json();
-  // console.log(data.results);
   return data.results;
 };
 
@@ -197,7 +196,6 @@ const renderSimilarMovies = (relatedMovies) => {
 
 const actorDetails = async (actor) => {
   const actorRes = await fetchActor(actor.id);
-  // console.log(actorRes)
   renderActor(actorRes);
 };
 
@@ -292,15 +290,14 @@ const fetchActors = async () => {
   const url = constructUrl(`person/popular`);
   const res = await fetch(url);
   const data = await res.json();
-  // console.log(data.results[0][3]);
   return data.results;
 };
 
 document.addEventListener("DOMContentLoaded", autorun);
 //Genre part
 
-const dropDownButtons = document.querySelectorAll("#dropdownBtn")
-const dropDownContent = document.querySelector("#dropdown")
+const btnDropDown = document.querySelectorAll("#dropdownBtn")
+const contDropDown = document.querySelector("#dropdown")
 const filterDropDown = document.querySelector("#filter-dropdown-content")
 
 filterDropDown.childNodes.forEach(link => {
@@ -330,10 +327,10 @@ filterDropDown.childNodes.forEach(link => {
 })
 
 // Dropdown clicks
-dropDownButtons.forEach(button => {
+btnDropDown.forEach(button => {
   button.addEventListener("click", (e) => {
     if (e.target.textContent === "Genre ") {
-      dropDownContent.classList.toggle("show")
+      contDropDown.classList.toggle("show")
     } else if (e.target.textContent === "Filter ") {
       filterDropDown.classList.toggle("show")
     }
@@ -342,8 +339,8 @@ dropDownButtons.forEach(button => {
 
 window.onclick = function (e) {
   if (!e.target.matches('#dropdownBtn')) {
-    if (dropDownContent.classList.contains('show')) {
-      dropDownContent.classList.remove('show');
+    if (contDropDown.classList.contains('show')) {
+      contDropDown.classList.remove('show');
     } else if (filterDropDown.classList.contains('show')) {
       filterDropDown.classList.remove('show');
     }
@@ -401,11 +398,12 @@ const aboutPage = () => {
   CONTAINER.innerHTML = `
       <div class="aboutPage grid grid-cols-3 gap-20 mt-10">
         <div class="github1">
-          <div class="gif" style="width:100%;height:0;padding-bottom:41%;position:relative;"><iframe src="https://giphy.com/embed/wEgs1cd7vDTt6" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/iron-man-wEgs1cd7vDTt6"></a></p>
+        <div class="gif" style="width:100%;height:0;padding-bottom:73%;position:relative;"><iframe src="https://giphy.com/embed/8xomIW1DRelmo" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/marvel-avengers-8xomIW1DRelmo">via GIPHY</a></p>
+          
           <h3  class="mt-3 text-center"><a href="https://github.com/AbdalrahmanM">Abdulrahman Alsamraie</a><h3>
         </div>
         <div class="github2">
-          <div class="gif" style="width:100%;height:0;padding-bottom:56%;position:relative;"><iframe src="https://giphy.com/embed/fbVm7CtfIbE7GeatQN" width="100%" height="100%" style="position:absolute"  frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/HBOMax-girl-power-wonder-woman-hbo-max-fbVm7CtfIbE7GeatQN"></a></p>         
+          <div class="gif" style="width:100%;height:0;padding-bottom:56%;position:relative;"><iframe src="https://giphy.com/embed/fbVm7CtfIbE7GeatQN" width="100%" height="100%" style="position:absolute "  frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/HBOMax-girl-power-wonder-woman-hbo-max-fbVm7CtfIbE7GeatQN"></a></p>         
           <h3  class="mt-3 text-center"><a href="https://github.com/pluviophillee" class="mt-3 text-center">Ebla Ekerdiker</a><h3>
         </div>
         <div class="github3">
@@ -413,7 +411,6 @@ const aboutPage = () => {
         <h3  class="mt-3 text-center"><a href="https://github.com/hunctasci" class="mt-3 text-center">Hunç Taşçı</a><h3>
         </div>
         <div>
-
         </div>
       </div>`
 };
