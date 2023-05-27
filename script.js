@@ -90,17 +90,19 @@ const fetchGenre = async () => {
     genreButton.appendChild(genreSelection);
 
     genreSelection.addEventListener("click", () => {
-      const apiKey = '0c33a84a65c320f35cf04b120b8ab6aa'; // Replace with your actual API key
-      fetch(`${TMDB_BASE_URL}/discover/movie?api_key=${apiKey}&with_genres=${element.id}`)
-        .then(resp => resp.json())
-        .then(data => renderMovies(data.results))
+      fetch(`${TMDB_BASE_URL}/discover/movie?api_key=${atob(
+          "NTQyMDAzOTE4NzY5ZGY1MDA4M2ExM2M0MTViYmM2MDI="
+      )}&with_genres=${element.id}`)
+          .then(resp => resp.json())
+          .then(data => renderMovies(data.results))
     })
   })
 };
 fetchGenre();
-
+//0c33a84a65c320f35cf04b120b8ab6aa
 // You'll need to play with this function in order to add features and enhance the style.
 const renderMovies = (movies) => {
+  CONTAINER.innerHTML="";
   movies.map((movie) => {
     const movieDiv = document.createElement("div");
     movieDiv.innerHTML = `
@@ -294,16 +296,98 @@ const fetchActors = async () => {
   return data.results;
 };
 
-const dropDownButtons = document.querySelectorAll("#dropdownBtn");
-const dropDownContent = document.querySelectorAll("#dropdown")
-dropDownButtons.forEach(button => {
-  button.addEventListener("click", (e) => {
-    if (e.target.textContent === "Genre ") {
-      dropDownContent.classList.toggle("show")
-    } else if (e.target.textContent === "Filter ") {
-      filterDropDown.classList.toggle("show")
-    }
-  })
-});
-
 document.addEventListener("DOMContentLoaded", autorun);
+//Genre part
+
+const dropDownButtons = document.querySelectorAll("#dropdownBtn")
+const dropDownContent = document.querySelector("#dropdown")
+const filterDropDown = document.querySelector("#filter-dropdown-content")
+
+filterDropDown.childNodes.forEach(link => {
+    link.addEventListener("click", () => {
+        if (link.textContent === "Up coming") {
+            fetch(`${TMDB_BASE_URL}/movie/upcoming?api_key=${atob(
+                "NTQyMDAzOTE4NzY5ZGY1MDA4M2ExM2M0MTViYmM2MDI=")}`)
+                .then(resp => resp.json())
+                .then(data => renderMovies(data.results))
+        } else if (link.textContent === "Popular") {
+            fetch(`${TMDB_BASE_URL}/movie/popular?api_key=${atob(
+                "NTQyMDAzOTE4NzY5ZGY1MDA4M2ExM2M0MTViYmM2MDI=")}`)
+                .then(resp => resp.json())
+                .then(data => renderMovies(data.results))
+        } else if (link.textContent === "Now playing") {
+            fetch(`${TMDB_BASE_URL}/movie/now_playing?api_key=${atob(
+                "NTQyMDAzOTE4NzY5ZGY1MDA4M2ExM2M0MTViYmM2MDI=")}`)
+                .then(resp => resp.json())
+                .then(data => renderMovies(data.results))
+        } else if (link.textContent === "Top rated") {
+            fetch(`${TMDB_BASE_URL}/movie/top_rated?api_key=${atob(
+                "NTQyMDAzOTE4NzY5ZGY1MDA4M2ExM2M0MTViYmM2MDI=")}`)
+                .then(resp => resp.json())
+                .then(data => renderMovies(data.results))
+        }
+    })
+})
+
+// Dropdown clicks
+dropDownButtons.forEach(button => {
+    button.addEventListener("click", (e) => {
+        if (e.target.textContent === "Genre ") {
+            dropDownContent.classList.toggle("show")
+        } else if (e.target.textContent === "Filter ") {
+            filterDropDown.classList.toggle("show")
+        }
+    })
+})
+
+window.onclick = function (e) {
+    if (!e.target.matches('#dropdownBtn')) {
+        if (dropDownContent.classList.contains('show')) {
+            dropDownContent.classList.remove('show');
+        } else if (filterDropDown.classList.contains('show')) {
+            filterDropDown.classList.remove('show');
+        }
+    }
+}
+
+const searchInput = document.getElementById("search-input");
+searchInput.addEventListener("input", (e) => {
+  fetch(`https://api.themoviedb.org/3/search/multi?api_key=542003918769df50083a13c415bbc602&language=en-US&query=${e.target.value}&page=1&include_adult=false`)
+  .then(resp => resp.json())
+  .then(data => { 
+    console.log(e.target.value)
+    data.results.forEach(result => {
+    if (result.media_type === "movie") {
+    renderMovies(data.results)}})})})
+
+    searchInput.addEventListener("input", (e) => {
+      fetch(`https://api.themoviedb.org/3/search/multi?api_key=542003918769df50083a13c415bbc602&language=en-US&query=${e.target.value}&page=1&include_adult=false`)
+      .then(resp => resp.json())
+      .then(data => { 
+        //console.log(data.results)
+        data.results.forEach(result => {
+          if (result.media_type === "movie") {
+            renderMovies(data.results)
+          }
+        })  
+        //actorsContainer.innerHTML = "";
+        data.results.forEach(result => {
+          if (result.media_type === "person") {
+            console.log(result.name)
+            const singleActor = document.createElement("div")
+            singleActor.setAttribute("class","actorsContainers");
+            const actorDiv = document.createElement("div");
+            actorDiv.innerHTML = `
+            <img  src="${PROFILE_BASE_URL + result.profile_path}" alt="${result.name} poster">
+            <h3>${result.name}</h3>`;
+    
+            actorDiv.addEventListener("click", () => {
+                actorDetails(actor);
+            });
+        
+           singleActor.appendChild(actorDiv);
+           actorsContainer.appendChild(singleActor);
+          }
+        })
+      })
+    })

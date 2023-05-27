@@ -22,17 +22,17 @@
               </div>
               <a href="#" id="actorsBtn" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Actor List</a>
               <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">About</a>
+              <div class="relative inline-block text-left">
+                <button id="dropdownBtn" data-dropdown-toggle="filter-dropdown-content" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" type="button">Filter</button>
+                <div id="filter-dropdown-content" class=" hidden bg-white divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                  <a href="">Up Coming</a>
+                  <a href="">Popular</a>
+                  <a href="">Now Playing</a>
+                  <a href="">Top Rated</a>
+                </div>
+              </div>
             </div>
-            <div class="flex items-center">
-              <input type="text" class="rounded-md px-3 py-2" placeholder="Search..."/>
-              <select class="rounded-md px-3 py-2 ml-2">
-                <option value="popular">Popular</option>
-                <option value="release-date">Release Date</option>
-                <option value="top-rated">Top Rated</option>
-                <option value="now-playing">Now Playing</option>
-                <option value="upcoming">Upcoming</option>
-              </select>
-            </div>
+            <input id="search-input" type="search" placeholder="  Search here!">
           </div>
         </div>
       </nav>
