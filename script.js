@@ -92,20 +92,19 @@ const fetchGenre = async () => {
       fetch(`${TMDB_BASE_URL}/discover/movie?api_key=${atob(
         "NTQyMDAzOTE4NzY5ZGY1MDA4M2ExM2M0MTViYmM2MDI="
       )}&with_genres=${element.id}`)
-        .then(resp => resp.json())
+        .then(response => response.json())
         .then(data => renderMovies(data.results))
     })
   })
 };
 fetchGenre();
-//0c33a84a65c320f35cf04b120b8ab6aa
 // You'll need to play with this function in order to add features and enhance the style.
 const renderMovies = (movies) => {
   CONTAINER.innerHTML = "";
   movies.map((movie) => {
     const movieDiv = document.createElement("div");
     movieDiv.innerHTML = `
-    <div class="items-center">
+    <div class="items-center animated-pic">
         <img id="movie-backdrop" class="w-96 rounded-full border border-gray-300 p-2 cursor-pointer" src="${BACKDROP_BASE_URL + movie.backdrop_path}" alt="${movie.title
       } poster">
     <h3 class="text-center mt-2 font-bold italic font-serif text-white bg-gradient-to-r from-purple-500 to-pink-500 rounded-full">${movie.title}</h3>
@@ -121,7 +120,7 @@ const renderMovies = (movies) => {
 const renderMovie = (movie, movieCast, movieDirector, relatedMovies, movieTrailer) => {
   CONTAINER.innerHTML = `
     <div class="row">
-      <divs>
+      <div>
         <img id="movie-backdrop" src="${BACKDROP_BASE_URL + movie.backdrop_path}">
       </div>
       <div class="col-md-8">
@@ -301,26 +300,26 @@ const contDropDown = document.querySelector("#dropdown")
 const filterDropDown = document.querySelector("#filter-dropdown-content")
 
 filterDropDown.childNodes.forEach(link => {
-  link.addEventListener("click", () => {
+  link.addEventListener("click", async() => {
     if (link.textContent === "Up coming") {
       fetch(`${TMDB_BASE_URL}/movie/upcoming?api_key=${atob(
         "NTQyMDAzOTE4NzY5ZGY1MDA4M2ExM2M0MTViYmM2MDI=")}`)
-        .then(resp => resp.json())
+        .then(response => response.json())
         .then(data => renderMovies(data.results))
     } else if (link.textContent === "Popular") {
       fetch(`${TMDB_BASE_URL}/movie/popular?api_key=${atob(
         "NTQyMDAzOTE4NzY5ZGY1MDA4M2ExM2M0MTViYmM2MDI=")}`)
-        .then(resp => resp.json())
+        .then(response => response.json())
         .then(data => renderMovies(data.results))
     } else if (link.textContent === "Now playing") {
       fetch(`${TMDB_BASE_URL}/movie/now_playing?api_key=${atob(
         "NTQyMDAzOTE4NzY5ZGY1MDA4M2ExM2M0MTViYmM2MDI=")}`)
-        .then(resp => resp.json())
+        .then(response => response.json())
         .then(data => renderMovies(data.results))
     } else if (link.textContent === "Top rated") {
       fetch(`${TMDB_BASE_URL}/movie/top_rated?api_key=${atob(
         "NTQyMDAzOTE4NzY5ZGY1MDA4M2ExM2M0MTViYmM2MDI=")}`)
-        .then(resp => resp.json())
+        .then(response => response.json())
         .then(data => renderMovies(data.results))
     }
   })
@@ -350,7 +349,7 @@ window.onclick = function (e) {
 const searchInput = document.getElementById("search-input");
 searchInput.addEventListener("input", (e) => {
   fetch(`https://api.themoviedb.org/3/search/multi?api_key=542003918769df50083a13c415bbc602&language=en-US&query=${e.target.value}&page=1&include_adult=false`)
-    .then(resp => resp.json())
+    .then(response => response.json())
     .then(data => {
       console.log(e.target.value)
       data.results.forEach(result => {
@@ -363,7 +362,7 @@ searchInput.addEventListener("input", (e) => {
 
 searchInput.addEventListener("input", (e) => {
   fetch(`https://api.themoviedb.org/3/search/multi?api_key=542003918769df50083a13c415bbc602&language=en-US&query=${e.target.value}&page=1&include_adult=false`)
-    .then(resp => resp.json())
+    .then(response => response.json())
     .then(data => {
       //console.log(data.results)
       data.results.forEach(result => {
@@ -398,7 +397,7 @@ const aboutPage = () => {
   CONTAINER.innerHTML = `
       <div class="aboutPage grid grid-cols-3 gap-20 mt-10">
         <div class="github1">
-        <div class="gif" style="width:100%;height:0;padding-bottom:73%;position:relative;"><iframe src="https://giphy.com/embed/8xomIW1DRelmo" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/marvel-avengers-8xomIW1DRelmo">via GIPHY</a></p>
+        <div class="gif" style="width:100%;height:0;padding-bottom:73%;position:relative;"><iframe src="https://giphy.com/embed/8xomIW1DRelmo" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/marvel-avengers-8xomIW1DRelmo"></a></p>
           
           <h3  class="mt-3 text-center"><a href="https://github.com/AbdalrahmanM">Abdulrahman Alsamraie</a><h3>
         </div>
